@@ -8,8 +8,6 @@ class Time(object):
         self.second = second
 
 class Tool(object):
-    def __init__(self):
-        self.time = None
 
     def display_machine_time(self):
         """
@@ -103,13 +101,6 @@ class Tool(object):
         """
         Syntax: RC
         Function: Read calibration constants from the flash memory
-        """
-        pass
-
-    def read_motor_load_profile(self):
-        """
-        Syntax: RD
-        Function: Read the averaged motor load profile of calibration
         """
         pass
     
@@ -237,13 +228,241 @@ class Tool(object):
         """
         pass
     
+    def save_gr_readings_to_flash(self, acquisition_number):
+        """
+        Syntax: SGB <# of acquisition>
+        Function: Save GR readings to the flash during the data saving interval (refer to command TR in Time and Date commands section) times as indicated by "# of acquisition"
+        E.G.: SGB 4 --> save GR reading 4 times to the flash per data saving interval.
+        """
+        pass
+
+    def toggle_live_sensor_display(self):
+        """
+        Syntax: SL
+        Function: Turn on/off sensor values live display (updated per second)
+        """
+        pass
+
+    def set_max_pulse_inclination(self, value):
+        """
+        Syntax: SI <Value>
+        Function: Set the max inclination for the inclination pulses. (inclination > max inclination, pulse 25 times)
+        Input: Value=0-90
+        E.G.: SI 5 --> max inclination = 5
+        """
+        pass
+
+    def set_gamma_ray_threshold(self, value):
+        """
+        Syntax: STT <Value>
+        Function: Set the threshold of gamma ray CPS, indicated by "Value", to zero the tool face.
+        Input: Value=0-0xFFFF
+        E.G.: TT 20 --> Tool face will be zeroed to the position, when gamma ray CPS exceeds 0x20.
+        """
+        pass
+
+    def toggle_tool_face_zeroing(self):
+        """
+        Syntax: STR
+        Function: Turn on/off the tool face zeroing function.
+        """
+        pass
+
+    def set_threshold_inclination_unit(self, value):
+        """
+        Syntax: STG <Value>
+        Function: Set the threshold inclination in unit of 0.1 degree, indicated by "Value", to switch to gravity tool face.
+        Input: Value = 0-0xFFFF
+        E.G.: STG 32 --> Switch to gravity tool face when inclination > 5 degrees.
+        """
+        pass
+
+    def set_gravity_tool_offset(self, value):
+        """
+        Syntax: STGO <Value>
+        Function: Set the offset of the gravity tool face, indicated by "Value".
+        Input: Value=0-0xFFFF
+        E.G.: STGO A --> Offset the gravity tool face by 10 degrees.
+        """
+        pass
+
+    def set_magnetic_tool_threshold(self, value):
+        """
+        Syntax: STH <Value>
+        Function: Set the threshold inclination in unit of 0.1 degree, indicated by "Value", to switch to magnetic tool face.
+        Input: Value=0-0xFFFF
+        E.G.: STH 32 --> Switch to magnetic tool face when inclination < 5 degrees.
+        """
+        pass
+
+    def set_magnetic_tool_offset(self, value):
+        """
+        Syntax: STHO <Value>
+        Function: Set the offset of teh magnetic tool face, indicated by "Value".
+        Input: Value=0-0xFFFF
+        E.G.: STHO A --> Offset the magnetic tool face by 10 degrees.
+        """
+        pass
+
+    def set_cycle_time_divider(self, value):
+        """
+        Syntax: PD <Value>
+        Function: Set cycle time divider to be "Value", this will shorten the cycle time as well as the frame time by the factor of "Value", pulse time is not affected.
+        Input: Value=0-0xFFFF
+        E.G.: PD 2 --> shorten the cycle time by half
+        """
+        pass
+
+    def set_cycle_time_multiplier(self, value):
+        """
+        Syntax: PM <Value>
+        Function: Set cycle time multiplier to be "Value", this will extend the cycle time as well as the frame time by the factor of "Value", pulse time is not affected.
+        Input: Value=0-0xFFFF
+        E.G.: PM 2 --> extend the cycle time by 2 times
+        """
+        pass
+
+    def set_regular_pule_time(self, milliseconds):
+        """
+        Syntax: PI <Time in ms>
+        Function: Set the regular pulse time to be "Time in ms", this does not affect the cycle time.
+        Input: Value = 0-0xFFFF
+        E.G.: PI C8 --> Set the pule time to be 200 ms.
+        """
+        pass
+
+    def set_actual_pulse_time(self, milliseconds):
+        """
+        Syntax: PIC <Time in ms>
+        Function: Set the actual pulse time of the 2/5 interleaved bar code to be "Time in ms", this does not affect the cycle time.
+        Input: Value = 0-0xFFFF
+        E.G.: PIC C8 --> Set the actual pulse time of the 2/5 interleaved bar code t obe 200ms.
+        """
+        pass
+
+    def set_min_code_pulse_time_difference(self, milliseconds):
+        """
+        Syntax: PID <Time in ms>
+        Function: Set the minimal time difference required between the actual pulse time and a code time of the 2/5 interleaved bar code to be "Time in ms"
+        Input: Value=0-0xFFFF
+        E.G.: PID F --> The 2/5 interleaved bar code time has to be at least 15ms longer than the actual pulse time (refer to command PIC)
+        """
+        pass
     
-        
+    def set_narrow_barcode_time(self, milliseconds):
+        """
+        Syntax: PIN <Time in ms>
+        Function: Set the time of the 2/5 interleaved narrow bar code to be "Time in ms".
+        Input: Value=0-0xFFFF
+        E.G.: PIC 1FC -> Set the narrow code time of the 2/5 interleaved bar code to be 500 ms.
+        """
+        pass
+
+    def set_wide_barcode_time(self, milliseconds):
+        """
+        Syntax: PIW <Time in ms>
+        Function: Set the time of the 2/5 interleaved wide bar code to be "Time in ms".
+        Input: Value=0-0xFFFF
+        E.G.: PIC 1FC --> Set the narrow code time of the 2/5 interleaved bar code to be 500 ms.
+        """
+        pass
+
+    def compensate_valve_closing_time(self, milliseconds):
+        """
+        Syntax: PIS <Time in ms>
+        Function: Compensate the valve closing time for the 2/5 interleaved bar code by "Time in ms".
+        Input: Value=0-0xFFFF
+        E.G.: PIS 10 --> Compensate the valve closing time by 10ms (will add to the actual pulse time)
+        """
+        pass
+
+    def compensate_valve_opening_time(self, milliseconds):
+        """
+        Syntax: PIO <Time in ms>
+        Function: Compensate the valve opening time for the 2/5 interleaved bar code by "Time in ms".
+        Input: Value=0-0xFFFF
+        E.G.: PIS 10 --> Compensate the valve opening time by 10 ms (will deduct from the actual pulse time)
+        """
+        pass
+
+    def set_sync_word_narrow_wide(self, bit_indicator):
+        """
+        Syntax: PYN <Bit indicator>
+        Function: Set the sync word as the narrow or wide code time indicated by the bits in "Bit indicator"
+        Input: Value=0-0xFFFF
+        E.G.: PYN 0000 --> sync word all narrow code time
+        """
+        pass
+
+    def set_sync_word_pulse_gap(self, bit_indicator):
+        """
+        Syntax: PYP <Bit indicator>
+        Function: Set the sync word as the pulse or gap indicatd by the bits in "Bit indicator" 
+        Input: Value = 0-0xFFFF
+        E.G.: PYP 2150 --> sync word 0010000101010000 with "1" indicates pulse, "0" indicates gap
+        """
+        pass
+
+    def set_sync_word_length(self, bit_number):
+        """
+        Syntax: PYI <# of bit>
+        Function: Set the length of the sync word as indicated by the "# of bit"
+        Input: Value=0-0x10
+        E.G.: PYLE --> sync word length 14 (*combine PYN, PYP, and PYL to define the sync word
+        """
+        pass
+
+    def set_pulse_stop_time(self, milliseconds):
+        """
+        Syntax: PS <Time in ms>
+        Function: Set the pulse stop time to be "Time in ms". When stop pulsing, there will be one pulse per pulse stop time.
+        Input: Value = 0-0xFFFFFFFF
+        E.G.: PS 7530 --> Set the pulse stop time to be 30 seconds, in that case, there will be 1 pulse per 30 seconds during pulse stopping period.
+        """
+        pass
+
+    def set_sequence_as_default(self, number):
+        """
+        Syntax: PQ <Q number>
+        Function: Set the "Q number" sequence to be the default pattern sequence to run.
+        Input: Value=0-2
+        E.G.: PQ 0 --> Set sequence in teh sequence buffer 0 to be the default sequence to run.
+        """
+        pass
     
-        
-        
-    
-    
+    def set_rotation_sensor_buffer(self, length):
+        """
+        Syntax: ORB <Value>
+        Function: Set the buffer of the ration sensor to be the length indicated by "Value"
+        Input: Value = 0-FF
+        E.G.: ORB 14 --> set rotation sensor buffer size to be 30 bins.
+        """
+        pass
+
+    def turn_on_rotation_indicator(self, count):
+        """
+        Syntax: ORT <Value>
+        Function: Count time as indicated by "Value" before turning on rotation indicator.
+        Input: Value = 0-FF
+        E.G.: OR 14 --> count 30 times before turning on rotation indicator, each count is about 1 sec.
+        """
+        pass
+
+    def turn_off_rotation_indicator(self, count):
+        """
+        Syntax: ORN <Value>
+        Function: Count time as indicated by "Value" before turning off rotation indicator.
+        Input: Value = 0-FF
+        E.G.: OR 14 --> count 30 times before turning off rotation indicator, each count is about 1 sec.
+        """
+        pass
+
+    def turn_on_quiet_indicator(self, count):
+        """
+        Syntax: OQT <Value>
+        Function: Count time as indicated by "Value" before tunring on quiet indicator.
+        """
+        pass
 
 class ToolSimulator(object):
     pass
